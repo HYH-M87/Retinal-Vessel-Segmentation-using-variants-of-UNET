@@ -41,16 +41,17 @@ def main():
     IMG_CHANNELS = 1
     input_shape = (IMG_HEIGHT, IMG_WIDTH, IMG_CHANNELS)
 
-    model = residual_attentionunet(input_shape)
+    model = attentionunet(input_shape)
     model.compile(optimizer=Adam(lr=1e-3), loss='binary_crossentropy', metrics=['accuracy'])
-    model.load_weights('Trained models/retina_AttentionRESUnet_150epochs.hdf5') # 加载权重
+    model.load_weights('Trained models/retina_attentionUnet_150epochs.hdf5') # 加载权重
     
     img_dir='/home/hyh/Documents/quanyi/project/Data/e_optha_MA/MA_ex/VOC2012/JPEGImages'
     mask_dir = '/home/hyh/Documents/quanyi/project/Data/e_optha_MA/MA_mask'
+    
     img_files = os.listdir(img_dir)
     for i in img_files:
         input_image_path = os.path.join(img_dir, i)
-        output_image_path = os.path.join('output_r', i)
+        output_image_path = os.path.join('output', i)
 
 
         test_img = skimage.io.imread(input_image_path)
